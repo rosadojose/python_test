@@ -83,3 +83,7 @@ class TestUrbanRoutes:
             self.pages.click_ice_cream()
         count = self.pages.get_ice_cream_count()
         assert count == 2, f"Expected 2 ice creams, got {count}"
+
+    def test_call_taxi(self):
+        self.pages.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.pages.click_call_taxi()

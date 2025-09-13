@@ -27,7 +27,6 @@ def retrieve_phone_code(driver) -> str:
                             "Please use retrieve_phone_code only after the code was requested in your application.")
         return code
 
-
 # Checks if Routes is up and running. Do not change
 def is_url_reachable(url):
     """Check if the URL can be reached. Pass the URL for Urban Routes as a parameter.
@@ -42,20 +41,12 @@ def is_url_reachable(url):
         ssl_ctx.verify_mode = ssl.CERT_NONE
 
         with urllib.request.urlopen(url, context=ssl_ctx) as response:
-            # print("Response Status Code:", response.status) #for debugging purposes
+            print("Response Status Code:", response.status)
             if response.status == 200:
-                return True
+                 return True
             else:
                 return False
     except Exception as e:
-        print(e)
+        print (e)
 
     return False
-
-
-@classmethod
-def setup_class(cls):
-    if helpers.is_url_reachable(data.URBAN_ROUTES_URL):
-        print("Connected to the Urban Routes server")
-    else:
-        print("Cannot connect to Urban Routes. Check the server is on and still running")
