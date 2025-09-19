@@ -88,5 +88,4 @@ class TestUrbanRoutes:
         self.pages.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.pages.click_call_taxi()
 
-        phone_input = self.pages.driver.find_element(*self.pages.PHONE_NUMBER_LOCATOR)
         assert phone_input.is_displayed(), "Phone number field should be visible after calling taxi"
