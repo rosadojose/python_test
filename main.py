@@ -118,10 +118,8 @@ class TestUrbanRoutes:
 
     def test_set_route(self):
         self.driver.get(data.URBAN_ROUTES_URL)
-        routes_page = UrbanRoutesPage(self.driver)
         self.pages.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
-        from_input = self.pages.driver.find_element(*self.pages.FROM_LOCATOR)
-        to_input = self.pages.driver.find_element(*self.pages.TO_LOCATOR)
+
         assert from_input.get_attribute("value") == data.ADDRESS_FROM, \
             f"Expected 'From' address to be {data.ADDRESS_FROM}, but got {from_input.get_attribute('value')}"
         assert to_input.get_attribute("value") == data.ADDRESS_TO, \
@@ -129,7 +127,6 @@ class TestUrbanRoutes:
 
     def test_select_supportive_plan(self):
         self.driver.get(data.URBAN_ROUTES_URL)
-        routes_page = UrbanRoutesPage(self.driver)
         self.pages.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.pages.click_call_taxi()
         self.pages.fill_phone_number(data.PHONE_NUMBER)
@@ -137,19 +134,18 @@ class TestUrbanRoutes:
         self.pages.select_supportive_plan()
         self.pages.fill_message(data.MESSAGE_FOR_DRIVER)
 
+        assert self.pages.is_supportive_plan_selected(), "Supportive plan should be selected"
 
     def test_fill_phone_number(self):
         self.driver.get(data.URBAN_ROUTES_URL)
-        routes_page = UrbanRoutesPage(self.driver)
         self.pages.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.pages.click_call_taxi()  # open the form
         self.pages.fill_phone_number(data.PHONE_NUMBER)
-        phone_input = self.pages.driver.find_element(*self.pages.PHONE_NUMBER_LOCATOR)
+
         assert phone_input.get_attribute("value") == data.PHONE_NUMBER
 
     def test_add_credit_card(self):
         self.driver.get(data.URBAN_ROUTES_URL)
-        routes_page = UrbanRoutesPage(self.driver)
         self.pages.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.pages.click_call_taxi()
         self.pages.fill_phone_number(data.PHONE_NUMBER)
@@ -229,16 +225,13 @@ class TestUrbanRoutes:
 
     def test_fill_phone_number(self):
         self.driver.get(data.URBAN_ROUTES_URL)
-        routes_page = UrbanRoutesPage(self.driver)
         self.pages.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.pages.click_call_taxi()  # open the form
         self.pages.fill_phone_number(data.PHONE_NUMBER)
-        phone_input = self.pages.driver.find_element(*self.pages.PHONE_NUMBER_LOCATOR)
         assert phone_input.get_attribute("value") == data.PHONE_NUMBER
 
     def test_add_credit_card(self):
         self.driver.get(data.URBAN_ROUTES_URL)
-        routes_page = UrbanRoutesPage(self.driver)
         self.pages.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.pages.click_call_taxi()
         self.pages.fill_phone_number(data.PHONE_NUMBER)
@@ -247,17 +240,14 @@ class TestUrbanRoutes:
         self.pages.fill_card_code(data.CARD_CODE)
         assert self.pages.is_link_button_clickable(), "Link button should be clickable after valid card input"
         self.driver.find_element(*self.LINK_BUTTON).click()
-        payment_method_element = self.pages.driver.find_element(*self.pages.PAYMENT_METHOD_LOCATOR)
         assert payment_method_element.text == "Card", \
             "Payment method should be updated to 'Card' after adding a credit card"
 
     def test_comment_for_driver(self):
         self.driver.get(data.URBAN_ROUTES_URL)
-        routes_page = UrbanRoutesPage(self.driver)
         self.pages.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.pages.click_call_taxi()  # ensures the message field is visible
         self.pages.fill_message(data.MESSAGE_FOR_DRIVER)
-        message_element = self.pages.driver.find_element(*self.pages.MESSAGE_LOCATOR)
         assert message_element.get_attribute("value") == data.MESSAGE_FOR_DRIVER, \
             "Driver message should match the input"
 
@@ -278,7 +268,7 @@ class TestUrbanRoutes:
         routes_page.click_call_taxi()
         routes_page.carmodel()
 
-        for _ in range(2):   # ✅ inside the function
+        for _ in range(2):
             routes_page.click_ice_cream()
 
         count = routes_page.get_ice_cream_count()
