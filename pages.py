@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 from typing import Any
 
+=======
+>>>>>>> 3613ed2cbf07b43d445a08137fb6dfcb533227f1
 import data
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+<<<<<<< HEAD
 from data import CARD_CODE
 
+=======
+>>>>>>> 3613ed2cbf07b43d445a08137fb6dfcb533227f1
 
 class UrbanRoutesPage:
     # -----Locators-----
@@ -19,12 +25,18 @@ class UrbanRoutesPage:
     CAR_MODEL_RESULT_LOCATOR = (By.CLASS_NAME, "carmodel")
     SELECT_SUPPORTIVE_PLAN = (By.CLASS_NAME, "selectplan")
     BLANKETS_AND_HANDKERCHIEFS = (By.CLASS_NAME, "blanket")
+<<<<<<< HEAD
     CARD_CODE = (By.XPATH, "//input[@name = 'cardcode']")
     LINK_BUTTON_LOCATOR = (By.XPATH, "//input[@name = 'linkbutton']")
     PAYMENT_METHOD_LOCATOR: tuple[Any, str] = (By.XPATH, "//input[@name = 'paymentmethod']")
     #-----Methods-----
     def __init__(self, driver):
                self.driver = driver
+=======
+    #-----Methods-----
+    def __init__(self, driver):
+        self.driver = driver
+>>>>>>> 3613ed2cbf07b43d445a08137fb6dfcb533227f1
 
     def set_route(self, address_from, address_to):
         self.driver.find_element(*self.FROM_LOCATOR).send_keys(address_from)
@@ -55,6 +67,7 @@ class UrbanRoutesPage:
 
     def blankets_and_handerchiefs(self):
             self.driver.find_element(*self.BLANKETS_AND_HANDKERCHIEFS).click()
+<<<<<<< HEAD
 
     def fill_card_code(self):
         self.driver.find_element(*self.CARD_CODE).send_keys(CARD_CODE)
@@ -76,3 +89,5 @@ class UrbanRoutesPage:
 
     def get_ice_cream_count(self):
         pass
+=======
+>>>>>>> 3613ed2cbf07b43d445a08137fb6dfcb533227f1
